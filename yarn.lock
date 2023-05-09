@@ -1261,15 +1261,10 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.4.2.tgz#d81f786fda2871d1eb8a8c5a73e455753ba53527"
   integrity sha512-z0zMCjyhhp4y7XKAcDAi3Vgms4T2PstwBdahiO0+9NaGICQKjynK3wduSRplTgk4LXmoO1yfDGO5RbjKYxtuxA==
 
-"@openzeppelin/contracts@^4.3.3":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.8.0.tgz#6854c37df205dd2c056bdfa1b853f5d732109109"
-  integrity sha512-AGuwhRRL+NaKx73WKRNzeCxOCOCxpaqF+kp8TJ89QzAipSwZy/NoflkWaL9bywXFRhIzXt8j38sfF7KBKCPWLw==
-
-"@openzeppelin/contracts@^4.6.0":
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.7.3.tgz#939534757a81f8d69cc854c7692805684ff3111e"
-  integrity sha512-dGRS0agJzu8ybo44pCIf3xBaPQN/65AIXNgK8+4gzKd5kbvlqyxryUYVLJv7fK98Seyd2hDZzVEHSWAh0Bt1Yw==
+"@openzeppelin/contracts@^4.3.3", "@openzeppelin/contracts@^4.8.3":
+  version "4.8.3"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.8.3.tgz#cbef3146bfc570849405f59cba18235da95a252a"
+  integrity sha512-bQHV8R9Me8IaJoJ2vPG4rXcL7seB7YVuskr4f+f5RyOStSZetwzkWtoqDMl5erkBJy0lDRUnIR2WIkPiC0GJlg==
 
 "@openzeppelin/hardhat-upgrades@^1.18.1":
   version "1.20.0"
@@ -3062,6 +3057,13 @@ bufio@^1.0.7:
   resolved "https://registry.yarnpkg.com/bufio/-/bufio-1.1.3.tgz#7f8e524fd719ced2caa563a09d50550f283f745f"
   integrity sha512-W0ydG8t+ST+drUpEwl1N+dU9Ije06g8+43CLtvEIzfKo9nPFLXbKqDYE2XSg4w6RugsBcCj7pEU7jOpBC6BqrA==
 
+busboy@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/busboy/-/busboy-1.6.0.tgz#966ea36a9502e43cdb9146962523b92f531f6893"
+  integrity sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==
+  dependencies:
+    streamsearch "^1.1.0"
+
 bytes@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.2.tgz#8b0beeb98605adf1b128fa4386403c009e0221a5"
@@ -3631,9 +3633,9 @@ cookie@^0.4.1:
   integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
 
 cookiejar@^2.1.1:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.3.tgz#fc7a6216e408e74414b90230050842dacda75acc"
-  integrity sha512-JxbCBUdrfr6AQjOXrxoTvAMJO4HBTUIlBzslcJPAz+/KT8yk53fXun51u+RenNYvad/+Vc2DIz5o9UxlCDymFQ==
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.4.tgz#ee669c1fea2cf42dc31585469d193fef0d65771b"
+  integrity sha512-LDx6oHrK+PhzLKJU9j5S7/Y3jM/mUHvD/DeI1WQmJn652iPC5Y4TBzC9l+5OMOXlyTTA+SmVUPm0HQUwpD5Jqw==
 
 copy-descriptor@^0.1.0:
   version "0.1.1"
@@ -9842,6 +9844,11 @@ stream-to-pull-stream@^1.7.1:
     looper "^3.0.0"
     pull-stream "^3.2.3"
 
+streamsearch@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-1.1.0.tgz#404dd1e2247ca94af554e841a8ef0eaa238da764"
+  integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
+
 strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
@@ -10499,9 +10506,11 @@ underscore@1.9.1:
   integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
 
 undici@^5.4.0:
-  version "5.8.2"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-5.8.2.tgz#071fc8a6a5d24db0ad510ad442f607d9b09d5eec"
-  integrity sha512-3KLq3pXMS0Y4IELV045fTxqz04Nk9Ms7yfBBHum3yxsTR4XNn+ZCaUbf/mWitgYDAhsplQ0B1G4S5D345lMO3A==
+  version "5.22.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-5.22.0.tgz#5e205d82a5aecc003fc4388ccd3d2c6e8674a0ad"
+  integrity sha512-fR9RXCc+6Dxav4P9VV/sp5w3eFiSdOjJYsbtWfd4s5L5C4ogyuVpdKIVHeW0vV1MloM65/f7W45nR9ZxwVdyiA==
+  dependencies:
+    busboy "^1.6.0"
 
 union-value@^1.0.0:
   version "1.0.1"
