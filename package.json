@@ -1,0 +1,90 @@
+{
+  "name": "bluefin-exchange-contracts-evm",
+  "version": "1.0.0",
+  "description": "Bluefin exchange isolated margin evm contracts",
+  "main": "",
+  "scripts": {
+    "update:submodules": "git submodule update --init --recursive",
+    "clean": "npx hardhat clean",
+    "build": "npx hardhat compile",
+    "test": "hardhat test",
+    "watch-test": "npx hardhat watch test",
+    "deploy": "ts-node ./publish/deploy.ts",
+    "size": "hardhat size-contracts",
+    "prettify:sol": "npx prettier --write {contracts/*.sol,contracts/**/*.sol}",
+    "prettify:ts": "npx prettier --write {publish/*.ts,scripts/*.ts,test/**/*.ts}",
+    "prettify": "yarn prettify:ts && yarn prettify:sol",
+    "solhint": "./node_modules/.bin/solhint -f table contracts/*.sol",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireflyprotocol/bluefin-exchange-contracts-evm.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fireflyprotocol/bluefin-exchange-contracts-evm/issues"
+  },
+  "homepage": "https://github.com/fireflyprotocol/bluefin-exchange-contracts-evm#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
+    "@nomiclabs/hardhat-ganache": "^2.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@openzeppelin/hardhat-upgrades": "^1.18.1",
+    "@types/chai": "^4.3.1",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^9.1.1",
+    "@types/yargs": "^17.0.10",
+    "chai": "^4.3.6",
+    "eslint": "^8.17.0",
+    "ethers": "^5.6.8",
+    "hardhat": "^2.9.7",
+    "hardhat-contract-sizer": "^2.5.1",
+    "hardhat-gas-reporter": "^1.0.8",
+    "hardhat-watcher": "^2.3.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "solhint": "^3.3.7",
+    "solhint-plugin-prettier": "^0.0.5",
+    "solidity-coverage": "^0.7.21",
+    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
+    "typechain": "^4.0.3",
+    "typescript": "^4.7.3",
+    "web3": "^1.7.5",
+    "web3-core": "1.7.5"
+  },
+  "dependencies": {
+    "@biconomy/mexa": "2.0.38",
+    "@chainlink/contracts": "^0.5.1",
+    "@ethersproject/experimental": "^5.6.2",
+    "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/contracts-upgradeable": "^4.6.0",
+    "@truffle/hdwallet-provider": "^2.0.17",
+    "@typechain/ethers-v5": "^6.0.4",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^3.0.0",
+    "dotenv": "^16.0.3",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "ganache-cli": "^6.12.2",
+    "hardhat-typechain": "^0.3.5",
+    "mocha": "^10.0.0",
+    "prettier": "^2.6.2",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "solc": "^0.8.14-fixed",
+    "ts-generator": "^0.1.1",
+    "yargs": "^17.5.1",
+    "yarn-audit-fix": "^9.0.10"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,sol}": [
+      "prettier --write"
+    ]
+  },
+  "private": true,
+  "workspaces": [
+    "submodules/*"
+  ]
+}

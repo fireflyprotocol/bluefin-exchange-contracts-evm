@@ -1,0 +1,3 @@
+[submodule "submodules/library"]
+	path = submodules/library
+	url = https://github.com/fireflyprotocol/library.git
