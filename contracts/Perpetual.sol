@@ -27,7 +27,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Perpetual
- * @author Team Firefly <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@firefly.exchange>
  * @notice Represents a perpetual being traded on firefly exchange. Each perpetual is pegged against the real
  * world asset via the price provded by the perpetual.
  * @dev The contract is made upgradable using openzeppelin upgrades-pluging, don't change

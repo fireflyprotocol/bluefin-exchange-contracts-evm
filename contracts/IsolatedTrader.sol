@@ -23,7 +23,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Isolated Trader
- * @author Team Firefly <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@firefly.exchange>
  * @notice Used to perform on-chain order cancellation and normal trade execution.
  * The trade() method on the contract is only invokable by the perpetual market.
  * The taker of the trade ( or settlement operator or a sub account) must invoke
