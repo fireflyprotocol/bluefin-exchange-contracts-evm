@@ -1,0 +1,12 @@
+node_modules
+package-lock.json
+artifacts
+cache
+.env
+.openzeppelin
+bin
+deployments/*.json
+coverage/
+coverage.json
+deploymentConfig.json
+yarn-error.log
