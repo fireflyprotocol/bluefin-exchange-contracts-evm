@@ -9,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol";
 
 /**
  * @title Margin Math
- * @author Team Firefly <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@firefly.exchange>
  * @notice Computes margin to be moved out off or into the user position under different
  * circumstances
  */

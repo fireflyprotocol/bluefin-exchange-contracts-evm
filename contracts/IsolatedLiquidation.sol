@@ -22,7 +22,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Isolated Liquidation
- * @author Team Firefly <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@firefly.exchange>
  * @notice Isolated Liquidation is a trader contract that executes liquidaiton trades.
  * The trade method on the contract is only invokable by the perpetual contract.
  * The liquidator must invoke trade() on perpetual to liquidate a position
