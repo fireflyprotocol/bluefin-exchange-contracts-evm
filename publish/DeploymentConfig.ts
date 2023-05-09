@@ -2,7 +2,6 @@ import { config } from "dotenv";
 import { toBigNumberStr } from "../submodules/library";
 import { processEnvString } from "./envHelpers";
 import { processTradingStartTime } from "./helpers";
-import { getBlockNumber } from "../test/helpers/utils";
 const params = require("../deploymentConfig.json");
 
 config({ path: ".env" });
