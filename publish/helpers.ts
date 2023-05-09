@@ -16,6 +16,15 @@ import {
     IsolatedADL__factory
 } from "../artifacts/typechain";
 
+import { processEnvRpcURL } from "./envHelpers";
+
+import {
+    ethers,
+    getFactory,
+    FactoryName,
+    NETWORK_NAME
+} from "../submodules/library";
+
 const fs = require("fs");
 
 export function readFile(filePath: string): any {
@@ -155,4 +164,22 @@ export function processTradingStartTime(tradingStartTime: any): string {
             }
         }
     }
+}
+
+export async function getAggregatorAddress(
+    proxyAddress: string
+): Promise<string> {
+    const providerURL = processEnvRpcURL(process.env.RPC_URL);
+    const provider = new ethers.providers.JsonRpcProvider(providerURL);
+    const chainlinkProxyFactory = getFactory(
+        NETWORK_NAME.arbitrum,
+        FactoryName.priceOracleProxy
+    );
+    const chainlinkProxyContract = chainlinkProxyFactory?.connect(
+        proxyAddress,
+        provider
+    );
+
+    const address = await chainlinkProxyContract?.aggregator();
+    return address;
 }
