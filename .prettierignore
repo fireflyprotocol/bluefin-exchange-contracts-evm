@@ -1,0 +1,8 @@
+# Ignore artifacts:
+build
+coverage
+artifacts
+node_modules
+
+# Ignore submodules
+submodules
