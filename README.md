@@ -12,7 +12,11 @@ Full Documentation at [https://learn.bluefin.io/arbitrum/](https://learn.bluefin
 - Ensure you are using Node 18.x.x
 - Copy content of `.env.example` file create a `.env` file
 - Update submodules by running `yarn update:submodules`
-- Install packages using `yarn`
+- Install packages:
+    - Run `yarn` on main directory
+    - cd submodules/library 
+    - Run `yarn` and `yarn build`
+    - And return back to main directory `cd ../../`
 - Compile contracts using `yarn build`
 - To run unit tests, ensure to set `DEPLOY_ON` flag  to `hardhat` and run `yarn test`
 - Create deployment config file at path "./bluefin-exchange-contracts-evm/deploymentConfig.json". An example is provided in "deploymentConfigExample.json"
