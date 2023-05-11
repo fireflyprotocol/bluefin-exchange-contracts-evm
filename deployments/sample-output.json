@@ -1,0 +1,57 @@
+{
+    "DOT-PERP": {
+        "Contracts": {
+            "USDC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+            "PriceOracleProxy": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+            "PriceOracleAggregator": "0xC975dEfb12C5e83F2C7E347831126cF136196447",
+            "MarginBank": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+            "FundingOracle": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+            "Perpetual": "0x9A676e781A523b5d0C0e43731313A708CB607508",
+            "Orders": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+            "Liquidation": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+            "Evaluator": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+            "Guardian": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+        },
+        "Config": {
+            "symbol": "DOT-PERP",
+            "quoteAssetSymbol": "USDC",
+            "quoteAssetName": "Circle USD",
+            "baseAssetSymbol": "DOT",
+            "baseAssetName": "Polkadot",
+            "defaultLeverage": "3000000000000000000",
+            "addressUSDC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+            "addressPriceOracle": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+            "addressGuardian": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+            "addressMarginBank": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+            "initialMarginReq": "100000000000000000",
+            "maintenanceMarginReq": "62500000000000000",
+            "defaultTakerFee": "10000000000000000",
+            "defaultMakerFee": "5000000000000000",
+            "minOrderPrice": "5200000000000000000",
+            "maxOrderPrice": "16010000000000000000",
+            "tickSize": "10000000000000000",
+            "minTradeQty": "1000000000000000",
+            "maxTradeQtyMarket": "1000000000000000000000",
+            "maxTradeQtyLimit": "10000000000000000000000",
+            "stepSize": "1000000000000000",
+            "mtbLong": "200000000000000000",
+            "mtbShort": "200000000000000000",
+            "maxAllowedOIOpen": [
+                "1000000000000000000000000",
+                "1000000000000000000000000",
+                "500000000000000000000000",
+                "500000000000000000000000",
+                "250000000000000000000000",
+                "250000000000000000000000",
+                "250000000000000000000000",
+                "250000000000000000000000",
+                "100000000000000000000000",
+                "100000000000000000000000"
+            ],
+            "insurancePoolPercentage": "300000000000000000",
+            "insurancePool": "0xb5F28C0acB63C18066775E7e64f14AbCDE750F2B",
+            "tradingStartTime": "1661952080",
+            "feePool": "0x7b03b950861ce2954fe9CBf93Dd518dd6A785C9b"
+        }
+    }
+}
