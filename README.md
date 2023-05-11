@@ -9,6 +9,7 @@ The smart contracts enable a non-custodial protocol for trading leveraged perpet
 Full Documentation at [https://learn.bluefin.io/arbitrum/](https://learn.bluefin.io/arbitrum/)
 
 ### Usage:
+- Ensure you are using Node 18.x.x
 - Copy content of `.env.example` file create a `.env` file
 - Update submodules by running `yarn update:submodules`
 - Install packages using `yarn`
