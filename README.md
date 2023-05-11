@@ -14,7 +14,7 @@ Full Documentation at [https://learn.bluefin.io/arbitrum/](https://learn.bluefin
 - Install packages using `yarn`
 - Compile contracts using `yarn build`
 - To run unit tests, ensure to set `DEPLOY_ON` flag  to `hardhat` and run `yarn test`
-- Setup a deployment config file at path "./bluefin-exchange-contracts-evm/deploymentConfig.json"
+- Create deployment config file at path "./bluefin-exchange-contracts-evm/deploymentConfig.json". An example is provided in "deploymentConfigExample.json"
 - To deploy contracts run `yarn deploy`
 - To print size of contracts run `yarn size`
 
