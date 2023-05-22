@@ -25,7 +25,7 @@ Full Documentation at [https://learn.bluefin.io/arbitrum/](https://learn.bluefin
 
 ## Design
 
-<to insert image>
+![Alt text](/imgs/design_overview.png?raw=true "Title")
 
 ### Evaluator.sol
 The contract stores different configuration variables for the market. It also has functions to evaluate trade parameters and values to ensure that trades are allowed and are within the required boundaries.
