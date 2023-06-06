@@ -430,7 +430,7 @@ contract IsolatedTrader is
                 takerPnl: takerData.pnl,
                 tradeQuantity: tradeData.fill.quantity,
                 price: tradeData.fill.price,
-                isBuy: !_isBuy(tradeData.orderA), // from taker's perspective
+                isBuy: _isBuy(tradeData.orderB), // from taker's perspective
                 traderFlags: TRADER_ID
             });
     }
@@ -824,6 +824,12 @@ contract IsolatedTrader is
         address maker,
         address taker
     ) internal view {
+        Require.that(
+            _isBuy(tradeData.orderA) != _isBuy(tradeData.orderB),
+            "IsolatedTrader: Maker and Taker orders can't be of same side",
+            taker
+        );
+
         // orderA.maker should be the maker of the trade
         _verifyOrderMaker(tradeData.orderA, maker);
 

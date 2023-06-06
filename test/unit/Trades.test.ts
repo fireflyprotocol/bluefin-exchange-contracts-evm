@@ -61,6 +61,8 @@ describe("Trades", () => {
         contracts = await deployAll({
             makerFee: toBigNumberStr(0.005),
             takerFee: toBigNumberStr(0.01),
+            mtbLong: toBigNumberStr(0.02),
+            mtbShort: toBigNumberStr(0.02),
             gasPool: GAS_POOL_ADDRESS
         });
 
@@ -625,13 +627,16 @@ describe("Trades", () => {
 
     it("should successfully open a position when bob is placing a market order with price zero", async () => {
         await contracts.priceOracle.connect(owner).setPrice(toBigNumberStr(26));
-        const makerOrder = createOrder({ price: 26, quantity: 20 });
+        const makerOrder = createOrder({
+            isBuy: true,
+            price: 26,
+            quantity: 20
+        });
         const takerOrder = createOrder({
+            isBuy: false,
             quantity: 20,
             makerAddress: await bob.getAddress()
         });
-
-        takerOrder.price = new BigNumber(0);
 
         const params: TradeParams = await Trader.setupNormalTrade(
             orderSigner,
@@ -671,6 +676,41 @@ describe("Trades", () => {
 
         const event = await parseEvent(txResult, "TradeExecuted");
         expect(event).to.be.equal(undefined);
+    });
+
+    it("should revert as maker/taker orders are both of same side", async () => {
+        await contracts.priceOracle
+            .connect(owner)
+            .setPrice(toBigNumberStr(1.193399));
+
+        const makerOrder = createOrder({
+            makerAddress: await alice.getAddress(),
+            price: 1.3128,
+            quantity: 1,
+            isBuy: false
+        });
+
+        const takerOrder = createOrder({
+            makerAddress: await bob.getAddress(),
+            price: 1.1977,
+            quantity: 1,
+            isBuy: false
+        });
+
+        const params: TradeParams = await Trader.setupNormalTrade(
+            orderSigner,
+            SigningMethod.HardhatTypedData,
+            bob,
+            alice,
+            makerOrder,
+            takerOrder
+        );
+
+        await expect(
+            contracts.perpetual.trade(params.accounts, [params.data], 0)
+        ).to.be.eventually.rejectedWith(
+            "IsolatedTrader: Maker and Taker orders can't be of same side"
+        );
     });
 
     describe("Add/Remove Margin", () => {
