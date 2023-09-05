@@ -16,5 +16,5 @@ interface IIsolatedTrader {
         bytes calldata data,
         uint128 gasCharges,
         uint128 oraclePrice
-    ) external;
+    ) external returns (uint128, uint128);
 }
