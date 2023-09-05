@@ -17,7 +17,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Evaluator
- * @author Team Firefly <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Stores perpetual configurations and evaluates if a trade is allowed to be executed based on perpetual configurations.
  * Houses the variables needed to perform pre-trade checks for price, quantity and max allowed open interest.
  * Implements IEvalautor interface to allow contracts to acccess these variables

@@ -21,7 +21,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Margin Bank
- * @author Team Bluefin <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Controls all the funds in perpetual protocol. Users must lock in their margin into margin bank
  * before it can be used to open any position on any perpetual market.
  * @dev When trades are executed to open/close position, the margin always remain in margin bank, just exchanges

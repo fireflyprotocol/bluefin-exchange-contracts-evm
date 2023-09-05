@@ -19,7 +19,7 @@ import {Types} from "./libraries/Types.sol";
 
 /**
  * @title Guardian
- * @author Team Bluefin <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Guardian contract, able to control certain aspects of the protocol including:
  * 1. starting/stopping trade on a perpetual
  * 2. starting/stopping withdrawal of funds from margin bank
