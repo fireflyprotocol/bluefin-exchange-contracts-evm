@@ -17,7 +17,7 @@ import {Types} from "./libraries/Types.sol";
 
 /**
  * @title Funding Oracle
- * @author Team Bluefin <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Computes on-chain funding payments to be applied to traders for next 1 hour
  * @dev The contract is made upgradable using openzeppelin upgrades-pluging, don't change
  * the order of variables. Read more: https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies

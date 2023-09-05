@@ -20,7 +20,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Isolated Auto Deleveraging
- * @author Team Bluefin <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Used to perform on-chain deleveraging of accounts.
  * The trade method on the contract is only invokable by the perpetual contract.
  * The ADL Operator or any account must invoke trade method on perpetual with trader

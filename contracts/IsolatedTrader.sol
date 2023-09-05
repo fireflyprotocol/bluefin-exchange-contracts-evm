@@ -23,7 +23,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Isolated Trader
- * @author Team Bluefin <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Used to perform on-chain order cancellation and normal trade execution.
  * The trade() method on the contract is only invokable by the perpetual market.
  * The taker of the trade ( or settlement operator or a sub account) must invoke
@@ -938,12 +938,22 @@ contract IsolatedTrader is
         bytes calldata data,
         uint128 gasCharges,
         uint128 oraclePrice
-    ) external override {
+    ) external override returns (uint128, uint128) {
+        require(
+            msgSender() == perpetual,
+            "IsolatedTrader: Gas charges could only be applied by Perpetual"
+        );
+
         TradeData memory tradeData = abi.decode(data, (TradeData));
 
         // apply gas charges
         // to taker
-        _applyGasCharges(tradeData.orderB, gasCharges, tradeData.fill.quantity);
+        uint128 takerCharges = _applyGasCharges(
+            tradeData.orderB,
+            gasCharges,
+            tradeData.fill.quantity
+        );
+        uint128 makerCharges = 0;
 
         // to maker
         // adjust gas charges
@@ -955,12 +965,14 @@ contract IsolatedTrader is
             : 0;
 
         if (gasCharges > 0) {
-            _applyGasCharges(
+            makerCharges = _applyGasCharges(
                 tradeData.orderA,
                 gasCharges,
                 tradeData.fill.quantity
             );
         }
+
+        return (makerCharges, takerCharges);
     }
 
     /**
@@ -972,24 +984,22 @@ contract IsolatedTrader is
         Order memory order,
         uint128 charges,
         uint128 fillQty
-    ) public {
+    ) internal returns (uint128) {
         bytes32 orderHash = _getOrderHash(order);
 
         // gas charges are only applied when order is being filled for the first time
         if (filledQuantity[orderHash] - fillQty == 0) {
-            IMarginBank(marginBank).transferMarginToAccount(
-                order.maker,
-                gasPool,
-                charges
-            );
-
             emit GasChargesPaid(
                 order.maker,
                 orderHash,
                 charges,
                 _blockTimestamp()
             );
+
+            return charges;
         }
+
+        return 0;
     }
 
     /**

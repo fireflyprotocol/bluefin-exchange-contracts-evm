@@ -27,7 +27,7 @@ import {Require} from "./libraries/Require.sol";
 
 /**
  * @title Perpetual
- * @author Team Bluefin <engineering@firefly.exchange>
+ * @author Team Bluefin <engineering@bluefin.io>
  * @notice Represents a perpetual being traded on firefly exchange. Each perpetual is pegged against the real
  * world asset via the price provded by the perpetual.
  * @dev The contract is made upgradable using openzeppelin upgrades-pluging, don't change
@@ -252,6 +252,12 @@ contract Perpetual is
     /// @notice address of operator that can execute Deleveraging trades
     address private deleveragingOperator;
 
+    /// @notice keeps track of gas charges accrued
+    uint128 public gasPoolAccruedAmt;
+
+    /// @notice keeps track of fee accrued
+    uint128 public feePoolAccruedAmt;
+
     //◢◣◢◣◢◣◢◣◢◣◢◣◢◣◢◣ add state variables above ◢◣◢◣◢◣◢◣◢◣◢◣◢◣◢◣//
 
     /**
@@ -421,13 +427,16 @@ contract Perpetual is
                 continue;
             }
 
-            // if trade is coming through a settlement operator,
-            // record it to compute funding price at the end
-            if (settlementOperators[sender]) {
-                IFundingOracle(addresses.funder).recordTrade(
-                    tradeResult.price,
-                    context.price
-                );
+            feePoolAccruedAmt += tradeResult.makerFee + tradeResult.takerFee;
+
+            // if a normal trade is being performed, apply gas charges if provided
+            if (traderFlags == bytes32(uint256(1)) && gasCharges > 0) {
+                (uint128 makerCharges, uint128 takerCharges) = IIsolatedTrader(
+                    trader
+                ).applyGasCharges(_trades[i].data, gasCharges, context.price);
+                gasPoolAccruedAmt += makerCharges + takerCharges;
+                tradeResult.makerFundsFlow += int256(uint256(makerCharges));
+                tradeResult.takerFundsFlow += int256(uint256(takerCharges));
             }
 
             /**
@@ -447,21 +456,6 @@ contract Perpetual is
                 _transferMargin(taker, tradeResult.takerFundsFlow);
                 // for maker
                 _transferMargin(maker, tradeResult.makerFundsFlow);
-            }
-            // transfer fee of trade to fee pool
-            IMarginBank(addresses.marginBank).transferMarginToAccount(
-                address(this),
-                addresses.feePool,
-                tradeResult.makerFee + tradeResult.takerFee
-            );
-
-            // if a normal trade is being performed, apply gas charges if provided
-            if (traderFlags == bytes32(uint256(1)) && gasCharges > 0) {
-                IIsolatedTrader(trader).applyGasCharges(
-                    _trades[i].data,
-                    gasCharges,
-                    context.price
-                );
             }
 
             // update position balance
@@ -714,7 +708,9 @@ contract Perpetual is
         );
 
         uint128 perpBalance = IMarginBank(addresses.marginBank)
-            .getAccountBankBalance(address(this));
+            .getAccountBankBalance(address(this)) -
+            feePoolAccruedAmt -
+            gasPoolAccruedAmt;
 
         /// @dev get margin to be returned to user
         uint128 marginLeft = IMarginMath(addresses.marginMath).getMarginLeft(
@@ -1024,6 +1020,37 @@ contract Perpetual is
         emit IMRUpdate(_initialMargin);
     }
 
+    /**
+     * @notice Transfers all accured fee from perpetual to fee pool
+     */
+    function transferAccruedFee() public onlyOwner nonReentrant {
+        // transfer fee of trade to fee pool
+        IMarginBank(addresses.marginBank).transferMarginToAccount(
+            address(this),
+            addresses.feePool,
+            feePoolAccruedAmt
+        );
+
+        // reset fee amount accrued
+        feePoolAccruedAmt = 0;
+    }
+
+    /**
+     * @notice Transfers all accured gas from perpetual to provided pool
+     * @param pool address of pool where to transfer gas charges
+     * @dev the perpetual contract is not aware about gas pool address hence taken as input from admin
+     */
+    function transferAccruedGas(address pool) public onlyOwner nonReentrant {
+        // transfer gas charges accrued from perp to provided pool
+        IMarginBank(addresses.marginBank).transferMarginToAccount(
+            address(this),
+            pool,
+            gasPoolAccruedAmt
+        );
+
+        gasPoolAccruedAmt = 0;
+    }
+
     //===========================================================//
     //                          GETTERS
     //===========================================================//
@@ -1085,9 +1112,13 @@ contract Perpetual is
     //===========================================================//
 
     function _transferMargin(address account, int256 fundsFlow) internal {
+        (address src, address dest) = fundsFlow < 0
+            ? (address(this), account)
+            : (account, address(this));
+
         IMarginBank(addresses.marginBank).transferMarginToAccount(
-            fundsFlow < 0 ? address(this) : account,
-            fundsFlow < 0 ? account : address(this),
+            src,
+            dest,
             BaseMath.absolute(fundsFlow)
         );
     }
