@@ -406,6 +406,11 @@ contract Perpetual is
             address maker = _accounts[_trades[i].makerIndex];
             address taker = _accounts[_trades[i].takerIndex];
 
+            // Self-trade prevention; position updates aren't needed
+            if (maker == taker) {
+                continue;
+            }
+
             // if liquidation trade
             if (traderFlags == bytes32(uint256(2))) {
                 // then liquidator must be taker of trades
@@ -422,10 +427,6 @@ contract Perpetual is
                 _trades[i].data
             );
 
-            // Self-trade prevention; position updates aren't needed
-            if (maker == taker) {
-                continue;
-            }
 
             feePoolAccruedAmt += tradeResult.makerFee + tradeResult.takerFee;
 
